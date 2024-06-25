@@ -1,17 +1,17 @@
 import { findAreaCode, randomAreaCode } from './area.ts'
 import { isDataType, randomInt } from '../utils/tools.ts'
-import { IdNoGenOptions, VERIFY_CODES, WEIGHT_LIST } from '../types/idCardTypes.ts'
+import { IdNoGenOptions, VERIFY_CODES, WEIGHT_LIST } from '../types/idNoTypes.ts'
 import { SexEnum } from "../types/enums.ts";
 
 /**
  * 随机生成一个身份证号码
  */
-export function generateIdNo(): string;
+export function generate(): string;
 /**
  * 随机生成一个指定年龄的身份证号码
  * @param age 年龄 eg: 18
  */
-export function generateIdNo(age: number): string;
+export function generate(age: number): string;
 /**
  * 通过解析一个出生年月（eg: 19901024, 1990-10-24, 1990/10/24），随机生成一个生日的身份证号码
  */
@@ -19,39 +19,39 @@ export function generateIdNo(age: number): string;
  * 通过解析一个出生年月，随机生成一个指定生日的身份证号码
  * @param birthday 出生日期 eg: 19901024, 1990-10-24, 1990/10/24
  */
-export function generateIdNo(birthday: string): string;
+export function generate(birthday: string): string;
 
 /**
  * 随机生成一个指定年龄和性别的身份证号码
  * @param age 年龄 eg: 18
  * @param sex 性别，eg: 男（or 1）、女（or 2）
  */
-export function generateIdNo(age: number, sex: SexEnum): string;
+export function generate(age: number, sex: SexEnum): string;
 /**
  * 通过解析一个出生年月，随机生成一个指定生日和性别的身份证号码
  * @param birthday 出生日期 eg: 19901024, 1990-10-24, 1990/10/24
  * @param sex 性别，eg: 男（or 1）、女（or 2）
  */
-export function generateIdNo(birthday: string, sex: SexEnum): string;
+export function generate(birthday: string, sex: SexEnum): string;
 /**
  * 随机生成一个指定年龄、性别、出生地的身份证号码
  * @param age 年龄 eg: 18
  * @param sex 性别，eg: 男（or 1）、女（or 2）
  * @param birthplace 出生地 eg: 安徽省凤阳县
  */
-export function generateIdNo(age: number, sex: SexEnum, birthplace: string): string;
+export function generate(age: number, sex: SexEnum, birthplace: string): string;
 /**
  * 通过解析一个出生年月，随机生成一个指定年龄、性别、出生地的身份证号码
  * @param birthday 出生日期 eg: 19901024, 1990-10-24, 1990/10/24
  * @param sex 性别，eg: 男（or 1）、女（or 2）
  * @param birthplace 出生地 eg: 安徽省凤阳县
  */
-export function generateIdNo(birthday: string, sex: SexEnum, birthplace: string): string;
+export function generate(birthday: string, sex: SexEnum, birthplace: string): string;
 /**
  * 随机生成指定配置的身份证号码
  * @param options {IdNoGenOptions} 配置项
  */
-export function generateIdNo(options: IdNoGenOptions): string;
+export function generate(options: IdNoGenOptions): string;
 /**
  * 生成身份证号, 可以指定如下参数，不指定就是随机的
  * @param ageOrBirthdayOrOptions 年龄或者直接指定出生日期 19901230，指定年龄和随机生成时年龄都会限制在16-90岁
@@ -59,7 +59,7 @@ export function generateIdNo(options: IdNoGenOptions): string;
  * @param sex 性别 1 or 男, 2 or 女
  * @param birthplace 所在地: eg: 安徽省凤阳县
  */
-export function generateIdNo(ageOrBirthdayOrOptions?: number | string | IdNoGenOptions, sex?: SexEnum, birthplace?: string) {
+export function generate(ageOrBirthdayOrOptions?: number | string | IdNoGenOptions, sex?: SexEnum, birthplace?: string) {
     let minAge = 16,
         maxAge = 90,
         birthday: Nullable<string>,
@@ -91,6 +91,30 @@ export function generateIdNo(ageOrBirthdayOrOptions?: number | string | IdNoGenO
     let verifyCode = getVerifyCode(idNo);
 
     return idNo + verifyCode;
+}
+
+/**
+ * 获取身份证校验码
+ * @param idNo 身份证号编码
+ */
+export function getVerifyCode(idNo: string): string {
+    if (!idNo || !/^\d{17}(\d|x|X)?$/.test(idNo)) {
+        return "";
+    }
+    let total = WEIGHT_LIST.reduce((sum,digit, index ) => sum + Number(digit) * Number(idNo.charAt(index)), 0)
+    return Number.isNaN(total) ? "" : VERIFY_CODES[total % 11];
+}
+
+export function validate(idNo: string) {
+    if (!idNo) return false;
+    // 将可能的小写转换成大写
+    idNo = idNo.toUpperCase();
+    let result = /^(\d{6})(\d{8})(\d{3})([0-9Xx]$)/.test(idNo);
+    // 基础格式正则都不通过, 直接false
+    if (!result) return false;
+    let verityCode = idNo[idNo.length - 1]?.toUpperCase(); // 最后一位是校验码，小写的x转大写
+    // 校验码都不通过, 直接false
+    return getVerifyCode(idNo) === verityCode;
 }
 
 /**
@@ -177,29 +201,4 @@ function getRand(sex?: SexEnum) {
         code = code === 999 ? code - 1 : code + 1;
     }
     return ("000" + code).slice(-3);
-}
-
-
-/**
- * 获取身份证校验码
- * @param idNo 身份证号编码
- */
-export function getVerifyCode(idNo: string): string {
-    if (!idNo || !/^\d{17}(\d|x|X)?$/.test(idNo)) {
-        return "";
-    }
-    let total = WEIGHT_LIST.reduce((sum,digit, index ) => sum + Number(digit) * Number(idNo.charAt(index)), 0)
-    return Number.isNaN(total) ? "" : VERIFY_CODES[total % 11];
-}
-
-export function validateIdNo(idNo: string) {
-    if (!idNo) return false;
-    // 将可能的小写转换成大写
-    idNo = idNo.toUpperCase();
-    let result = /^(\d{6})(\d{8})(\d{3})([0-9Xx]$)/.test(idNo);
-    // 基础格式正则都不通过, 直接false
-    if (!result) return false;
-    let verityCode = idNo[idNo.length - 1]?.toUpperCase(); // 最后一位是校验码，小写的x转大写
-    // 校验码都不通过, 直接false
-    return getVerifyCode(idNo) === verityCode;
 }

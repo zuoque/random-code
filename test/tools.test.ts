@@ -1,4 +1,4 @@
-import { isUndef, isDef, isTrue, isFalse, randomInt, randomNumericStr } from "../utils/tools.ts";
+import { isUndef, isDef, isTrue, isFalse, randomInt, randomNumericStr } from "../src/utils/tools.ts";
 
 // 生成jest测试用例
 describe("测试tool.ts相关工具函数", () => {

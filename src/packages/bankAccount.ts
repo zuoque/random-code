@@ -24,7 +24,7 @@ export const BANK_BIN_RANG_MAP = new Map([
  * @param bankName 银行名称或是英文简写
  * @param len 指定长度
  */
-export function generateBankAccount(bankName?: string, len?: number): string {
+export function generate(bankName?: string, len?: number): string {
     // 随机发卡行标识码(前6位)
     let bin = getBin(bankName);
     // 银联标准卡长度一般是16-19位。其中信用卡的长度为16位，借记卡的长度为19位
@@ -106,7 +106,7 @@ export function getBin(bankName?: string): string {
  * 校验银行卡号是否合法
  * @param bankAccount
  */
-export function validateBankAccount(bankAccount: string): boolean {
+export function validate(bankAccount: string): boolean {
     if (!bankAccount) return false;
     // 截取本位码
     let baseCodes = (bankAccount + "").slice(0, -1);

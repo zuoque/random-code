@@ -1,5 +1,5 @@
-import {BASE_CODE_COUNT, CHARS_STR, MOD_CODE_MAP, WEIGHTS} from "../types/orgCodeTypes.ts";
-import {randomInt} from "../utils/tools.ts";
+import { BASE_CODE_COUNT, CHARS_STR, MOD_CODE_MAP, WEIGHTS } from "../types/orgCodeTypes.ts";
+import { randomInt } from "../utils/tools.ts";
 
 
 /**
@@ -11,7 +11,7 @@ import {randomInt} from "../utils/tools.ts";
  * @param baseCode 本位码
  * @returns {string}
  */
-export function generateOrgCode(baseCode?:string): string{
+export function generate(baseCode?:string): string{
     let isValid = false; // 指定的码是否是有效code
     // 8位字符串是前提
     if (typeof baseCode === "string" && baseCode.length === BASE_CODE_COUNT) {
@@ -55,7 +55,7 @@ export function getVerityCode(baseCode: string): string {
  * @param code
  * @returns {boolean}
  */
-export function validateOrgCode(code: string): boolean {
+export function validate(code: string): boolean {
     if (!code) return false;
     code = code.trim();
     let verityCode = getVerityCode(code.substring(0, 8));

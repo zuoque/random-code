@@ -1,3 +1,10 @@
+// 17个权重因子集合
+export const WEIGHTS = [1, 3, 9, 27, 19, 26, 16, 17, 20, 29, 25, 13, 8, 24, 10, 30, 28];
+
+// 代码字符数值表
+export const CHAR_CODE_MAP = "0123456789ABCDEFGHJKLMNPQRTUWXY"
+
+
 /**
  * 第1位：登记管理部门代码，使用阿拉伯数字或英文字母表示。
  * 分为1机构编制；2外交；3司法行政；4文化；5民政；6旅游；7宗教；8工会；9工商；A中央军委改革和编制办公室；N农业；Y其他。
@@ -137,12 +144,6 @@ export type DeptChildMap = DeptValueMap['child'];
 export type DeptAndOrgName2CodeMap = ManageDeptCodesMap | DeptChildMap;
 
 export type DeptOrOrgNames = keyof DeptAndOrgName2CodeMap;
-
-// 17个权重因子集合
-export const WEIGHTS = [1, 3, 9, 27, 19, 26, 16, 17, 20, 29, 25, 13, 8, 24, 10, 30, 28];
-
-// 代码字符数值表
-export const CHAR_CODE_MAP = "0123456789ABCDEFGHJKLMNPQRTUWXY"
 
 export type CodeType = Nullable<string | number>;
 export type DeptAndOrgCodeMapType = { deptCode: CodeType, orgCode: CodeType }

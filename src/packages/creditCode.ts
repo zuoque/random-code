@@ -8,9 +8,9 @@ import {
     CodeType,
     DeptAndOrgCodeMapType
 } from "../types/creditCodeTypes.ts";
-import {findFitWords} from "../utils/tools.ts";
-import {findAreaCode, randomAreaCode} from "./area.ts";
-import {generateOrgCode} from "./orgCode.ts";
+import { findFitWords } from "../utils/tools.ts";
+import { findAreaCode, randomAreaCode } from "./area.ts";
+import { generate as generateOrgCode } from "./orgCode.ts";
 
 
 /**
@@ -19,7 +19,7 @@ import {generateOrgCode} from "./orgCode.ts";
  * @param org 机构类别名称
  * @param area 公司所在地
  */
-export function generateCreditCode(dept?:string, org?:string, area?:string): string {
+export function generate(dept?:string, org?:string, area?:string): string {
     let deptCode: CodeType,
         orgCode: CodeType;
 
@@ -52,7 +52,7 @@ export function generateCreditCode(dept?:string, org?:string, area?:string): str
  * @param creditCode
  * @returns {*|boolean}
  */
-export function validateCreditCode(creditCode: string): boolean {
+export function validate(creditCode: string): boolean {
     if (!creditCode || creditCode.length !== 18) return false;
     // 前17位计算出的校验码
     let verifyCode = getVerifyCode(creditCode);

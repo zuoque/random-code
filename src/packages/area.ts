@@ -1,6 +1,6 @@
-import {areaList} from "@vant/area-data"
-import {removeDuplicateWords} from "../utils/tools.ts";
-import {AreaLevelEnum} from "../types/enums.ts";
+import { areaList } from "@vant/area-data"
+import { removeDuplicateWords } from "../utils/tools.ts";
+import { AreaLevelEnum } from "../types/enums.ts";
 
 /**
  * 获取随机的行政区划代码
@@ -146,10 +146,6 @@ export function findAreaCode(addr: string): string {
     let target = findFullAreaAddr(addr);
     if (!target) return "";
     let code = Object.keys(addrMap).find(code => addrMap[code] === target)
-    console.log("当前模糊地址: ", addr);
-    console.log("当前匹配到的完整地址: ", target);
-    console.log("对应地址的code: ", code)
-    console.log("=====================================")
     return code || "";
 }
 
@@ -173,5 +169,3 @@ export function getCountyByCode(codeOrIdNo: string): string {
     if (code.length > 6) code = code.substring(0, 6);
     return areaList.county_list[code] || "";
 }
-
-console.log(findFullAreaAddr("东至"))
