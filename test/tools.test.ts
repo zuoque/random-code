@@ -61,4 +61,42 @@ describe("测试tool.ts相关工具函数", () => {
         expect(strArr.length).toBeGreaterThan(0);
         expect(strArr[0]).toBe("上海市上海市浦东新区");
     })
+
+    it('countDiffAndEqual的方法测试', () => {
+        const result = tools.countDiffAndEqual("安徽歙县", "安徽省黄山市歙县")
+        expect(result.diff).toBe(4);
+        expect(result.equal).toBe(4);
+    })
+
+    it('getDataType方法测试', () => {
+        const getDataType = tools.getDataType;
+        expect(getDataType(undefined)).toBe("undefined");
+        expect(getDataType(null)).toBe("null");
+        expect(getDataType(0)).toBe("number");
+        expect(getDataType("")).toBe("string");
+        expect(getDataType({})).toBe("object");
+        expect(getDataType([])).toBe("array");
+        expect(getDataType(() => {})).toBe("function");
+    });
+
+    it('isDataType方法测试', () => {
+        const isDataType = tools.isDataType;
+        expect(isDataType(undefined, "undefined")).toBe(true);
+        expect(isDataType(undefined, "null")).toBe(false);
+        expect(isDataType(null, "null")).toBe(true);
+        expect(isDataType(null, "object")).toBe(false);
+        expect(isDataType(0, "number")).toBe(true);
+        expect(isDataType("", "string")).toBe(true);
+        expect(isDataType({}, "object")).toBe(true);
+        expect(isDataType([], "array")).toBe(true);
+        expect(isDataType([], "object")).toBe(false);
+        expect(isDataType(() => {}, "function")).toBe(true);
+    });
+
+    it('removeDuplicateWords方法测试', () => {
+        const removeDuplicateWords = tools.removeDuplicateWords;
+        expect(removeDuplicateWords("上海市上海市浦东新区")).toBe("上海市浦东新区");
+        expect(removeDuplicateWords("上海上海浦东新区")).toBe("上海浦东新区");
+        expect(removeDuplicateWords("上海市上海浦东新区")).toBe("上海市上海浦东新区");
+    })
 })
