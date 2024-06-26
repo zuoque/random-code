@@ -1,10 +1,47 @@
 {
-  "name": "random-coding",
-  "private": true,
-  "version": "0.0.0",
+  "name": "random-code",
+  "description": "提供随机的身份证号、统一社会信用代码、组织机构代码、手机号、银行卡号生成方法",
+  "private": false,
+  "version": "0.0.1",
+  "author": "zuoque",
   "type": "module",
+  "main": "dist/main.js",
+  "files": ["dist"],
+  "exports": {
+    ".": {
+      "require": "./dist/main.cjs",
+      "default": "./dist/main.js"
+    },
+    "./tools": {
+      "require": "./dist/tools/tools.cjs",
+      "default": "./dist/tools/tools.js"
+    },
+    "./area": {
+      "require": "./dist/area/area.cjs",
+      "default": "./dist/area/area.js"
+    },
+    "./bank-account": {
+      "require": "./dist/bankAccount/bankAccount.cjs",
+      "default": "./dist/bankAccount/bankAccount.js"
+    },
+    "./credit-code": {
+      "require": "./dist/creditCode/creditCode.cjs",
+      "default": "./dist/creditCode/creditCode.js"
+    },
+    "./id-no": {
+      "require": "./dist/idNo/idNo.cjs",
+      "default": "./dist/idNo/idNo.js"
+    },
+    "./org-code": {
+      "require": "./dist/orgCode/orgCode.cjs",
+      "default": "./dist/orgCode/orgCode.js"
+    },
+    "./phone": {
+      "require": "./dist/phone/phone.cjs",
+      "default": "./dist/phone/phone.js"
+    }
+  },
   "scripts": {
-    "dev": "vite",
     "build": "tsc && vite build",
     "preview": "vite preview",
     "test": "jest"

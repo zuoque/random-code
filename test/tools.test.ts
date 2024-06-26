@@ -1,7 +1,9 @@
-import { isUndef, isDef, isTrue, isFalse, randomInt, randomNumericStr } from "../src/utils/tools.ts";
+import * as tools from "../src/utils/tools.ts";
+import { addrMap } from "../src/packages/area.ts";
 
 // 生成jest测试用例
 describe("测试tool.ts相关工具函数", () => {
+    const isUndef = tools.isUndef;
     it("isUndef方法测试", () => {
         expect(isUndef(undefined)).toBe(true);
         expect(isUndef(null)).toBe(true);
@@ -13,6 +15,7 @@ describe("测试tool.ts相关工具函数", () => {
     })
 
     it('isDef方法测试', () => {
+        const isDef = tools.isDef;
         expect(isDef(undefined)).toBe(false);
         expect(isDef(null)).toBe(false);
         expect(isDef(0)).toBe(true);
@@ -23,6 +26,7 @@ describe("测试tool.ts相关工具函数", () => {
     });
 
     it('isTrue方法测试', () => {
+        const isTrue = tools.isTrue;
         expect(isTrue(true)).toBe(true);
         expect(isTrue(1)).toBe(false);
         expect(isTrue("true")).toBe(false);
@@ -30,6 +34,7 @@ describe("测试tool.ts相关工具函数", () => {
     });
 
     it('isFalse方法测试', () => {
+        const isFalse = tools.isFalse;
         expect(isFalse(false)).toBe(true);
         expect(isFalse(0)).toBe(false);
         expect(isFalse("false")).toBe(false);
@@ -37,6 +42,7 @@ describe("测试tool.ts相关工具函数", () => {
     });
 
     it('randomInt方法测试', () => {
+        const randomInt = tools.randomInt;
         expect(randomInt()).toBeGreaterThanOrEqual(0);
         expect(randomInt(100)).toBeGreaterThanOrEqual(0);
         expect(randomInt(1, 100)).toBeGreaterThanOrEqual(1);
@@ -44,8 +50,15 @@ describe("测试tool.ts相关工具函数", () => {
     })
 
     it('randomNumericStr方法测试', () => {
-        const str = randomNumericStr(10);
+        const str = tools.randomNumericStr(10);
         expect(str.length).toBe(10);
         expect(str.match(/^\d+$/)).not.toBeNull();
+    })
+
+
+    it('findFitWords方法测试', () => {
+        const strArr = tools.findFitWords("浦东", Object.values(addrMap));
+        expect(strArr.length).toBeGreaterThan(0);
+        expect(strArr[0]).toBe("上海市上海市浦东新区");
     })
 })

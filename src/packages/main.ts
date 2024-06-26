@@ -1,6 +1,0 @@
-export * as areaUtils from './area.ts'
-export * as bankAccountUtils from './bankAccount.ts'
-export * as creditCodeUtils from './creditCode.ts'
-export * as idNoUtils from './idNo.ts'
-export * as orgCodeUtils from './orgCode.ts'
-export * as phoneUtils from './phone/index.ts'
