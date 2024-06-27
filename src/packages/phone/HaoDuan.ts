@@ -31,7 +31,7 @@ export class HaoDuan {
         if (telco) {
             haoDuanList = HaoDuan.HAO_DUAN_MAP[telco] || [];
         }
-        let max = haoDuanList.length;
+        let max = haoDuanList.length - 1;
         return haoDuanList[randomInt(max)] || "";
     }
 

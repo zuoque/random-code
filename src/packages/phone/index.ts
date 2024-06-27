@@ -40,7 +40,7 @@ export function generate(haoduanOrTelco?: string | TELCO_ENUM): string {
     }
     if (haoDuan === "134") {
         // 134的号段，第二位是0-8
-        return haoDuan + randomInt(0, 8);
+        return haoDuan + randomInt(0, 8) + randomNumericStr(7);
     }
     let nextCode = randomNumericStr(11 - haoDuan.length)
     return haoDuan + nextCode;
