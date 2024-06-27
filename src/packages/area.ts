@@ -94,11 +94,11 @@ export function findFullAreaAddr(fuzzyAddr: string): string {
     let target = "";
     let preEqualWords = 0; // 上一个匹配的最大相同字数
     let minDiffWords = Infinity; // 最小不同字数
+    // 一些无关的的字去掉
+    let reg = /(自治)?([省市区县乡])/g;
+    let areaCharList = fuzzyAddr.replace(reg, "").split("");
     Object.values(addrMap).forEach(addr => {
-        // 一些无关的的字去掉
-        let reg = /(自治)?([省市区县乡])/g;
         let addrCharList = addr.replace(reg, "").split("");
-        let areaCharList = fuzzyAddr.replace(reg, "").split("");
         let len = addrCharList.length;
         let count = 0; // 相同字统计
         let index = 0;
@@ -116,7 +116,7 @@ export function findFullAreaAddr(fuzzyAddr: string): string {
         // 相同字至少要有4个, 并且
         // 1. 当前统计的相同字数比之前匹配的多
         // 2. 或是与前一个匹配到相同的字数相同, 但是不同的字更少
-        if (count >= Math.min(fuzzyAddr.length, 4) && (count > preEqualWords || (count === preEqualWords && currDiffCount < minDiffWords))) {
+        if (count >= Math.min(areaCharList.length, 4) && (count > preEqualWords || (count === preEqualWords && currDiffCount < minDiffWords))) {
             minDiffWords = currDiffCount;
             preEqualWords = count;
             target = addr;
