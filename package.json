@@ -6,7 +6,9 @@
   "author": "zuoque",
   "type": "module",
   "main": "dist/main.js",
-  "files": ["dist"],
+  "files": [
+    "dist"
+  ],
   "exports": {
     ".": {
       "require": "./dist/main.cjs",
@@ -51,6 +53,7 @@
   },
   "devDependencies": {
     "@types/jest": "^29.5.12",
+    "date-fns": "^3.6.0",
     "jest": "^29.7.0",
     "ts-jest": "^29.1.4",
     "ts-node": "^10.9.2",

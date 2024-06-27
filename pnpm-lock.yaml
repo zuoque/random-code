@@ -13,6 +13,9 @@ devDependencies:
   '@types/jest':
     specifier: ^29.5.12
     version: 29.5.12
+  date-fns:
+    specifier: ^3.6.0
+    version: 3.6.0
   jest:
     specifier: ^29.7.0
     version: 29.7.0(@types/node@20.14.1)(ts-node@10.9.2)
@@ -1412,6 +1415,10 @@ packages:
       path-key: 3.1.1
       shebang-command: 2.0.0
       which: 2.0.2
+    dev: true
+
+  /date-fns@3.6.0:
+    resolution: {integrity: sha512-fRHTG8g/Gif+kSh50gaGEdToemgfj74aRX3swtiouboip5JDLAyDE9F11nHMIcvOaXeOC6D7SpNhi7uFyB7Uww==}
     dev: true
 
   /debug@4.3.5:
