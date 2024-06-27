@@ -1,5 +1,5 @@
 import { findAreaCode, randomAreaCode } from './area.ts'
-import { isDataType, randomInt } from '../utils/tools.ts'
+import {isDataType, isDef, randomInt} from '../utils/tools.ts'
 import { IdNoGenOptions, VERIFY_CODES, WEIGHT_LIST } from '../types/idNoTypes.ts'
 import { SexEnum } from "../types/enums.ts";
 
@@ -12,9 +12,7 @@ export function generate(): string;
  * @param age 年龄 eg: 18
  */
 export function generate(age: number): string;
-/**
- * 通过解析一个出生年月（eg: 19901024, 1990-10-24, 1990/10/24），随机生成一个生日的身份证号码
- */
+
 /**
  * 通过解析一个出生年月，随机生成一个指定生日的身份证号码
  * @param birthday 出生日期 eg: 19901024, 1990-10-24, 1990/10/24
@@ -71,7 +69,7 @@ export function generate(ageOrBirthdayOrOptions?: number | string | IdNoGenOptio
         sex = obj.sex || sex;
         birthplace = obj.birthplace || birthplace;
         birthday = obj.birthday;
-        age = obj.age; // 不接受0
+        age = obj.age;
     } else if (isDataType(ageOrBirthdayOrOptions, 'number')) {
         age = ageOrBirthdayOrOptions as number;
     } else if (isDataType(ageOrBirthdayOrOptions, 'string')) {
@@ -82,7 +80,7 @@ export function generate(ageOrBirthdayOrOptions?: number | string | IdNoGenOptio
     let areaCode = birthplace && findAreaCode(birthplace) || randomAreaCode();
     // 随机出生日期: 16-90岁
     birthday = birthday && isValidBirthday(birthday) && birthday.replace(/\D/g, "")
-        || ( age ? genBirthday(age) : genBirthday(minAge, maxAge));
+        || ( isDef(age) && age >= 0 ? genBirthday(age) : genBirthday(minAge, maxAge));
     // 随机顺序码
     let rand = getRand(sex);
 
@@ -135,7 +133,7 @@ export function genBirthday(ageMin: number, ageMax: number): string;
  * @param ageMax 最大年龄
  */
 export function genBirthday(ageOrAgeMin: number, ageMax?: number): string {
-    if (!ageOrAgeMin && ageOrAgeMin !== 0) {
+    if (!ageOrAgeMin && ageOrAgeMin !== 0 || ageOrAgeMin < 0) {
         return ""
     }
     let age = ageOrAgeMin;
