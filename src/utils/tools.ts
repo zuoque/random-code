@@ -197,3 +197,34 @@ export function removeDuplicateWords(text: string): string {
     // 存在连续词汇（两个字以上）的重复时，则去掉重复的部分
     return text.replace(/(.{2,})\1/g, "$1");
 }
+
+
+/**
+ * 通过身份证号或生日计算法定年龄(或虚岁)
+ * @param idNoOrBirthday
+ * @param isVirtualAge 是否计算为虚岁
+ */
+export function getAge(idNoOrBirthday: string, isVirtualAge = false): Nullable<number> {
+    if (!idNoOrBirthday) return null;
+    let birthday = idNoOrBirthday;
+    if (idNoOrBirthday.length === 18) {
+        birthday = idNoOrBirthday.slice(6, 14);
+    }
+    birthday = birthday.replace(/\D/g, "");
+    let now = new Date(),
+        cYear = now.getFullYear(),
+        bYear = +birthday.slice(0, 4),
+        bMonth = +birthday.slice(4, 6),
+        bDay = +birthday.slice(6, 8);
+
+    // 未来出生的都算作0
+    if (bYear > cYear) return 0;
+    let base = Math.max(cYear - bYear, 0);
+    if (isVirtualAge) return base + 1;
+    // 如果是当年出生的，直接算0岁
+    if (base === 0) return 0;
+    // 如果是往年出生的，要看今年是否过了生日
+    const nextBirthday = new Date(cYear, bMonth - 1, bDay, 0, 0, 0);
+    // 如果还没过生日要少算一年
+    return (+now >= +nextBirthday) ? base : base - 1;
+}

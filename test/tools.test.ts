@@ -1,5 +1,6 @@
 import * as tools from "../src/utils/tools.ts";
 import { addrMap } from "../src/packages/area.ts";
+import { format } from "date-fns"
 
 // 生成jest测试用例
 describe("测试tool.ts相关工具函数", () => {
@@ -98,5 +99,81 @@ describe("测试tool.ts相关工具函数", () => {
         expect(removeDuplicateWords("上海市上海市浦东新区")).toBe("上海市浦东新区");
         expect(removeDuplicateWords("上海上海浦东新区")).toBe("上海浦东新区");
         expect(removeDuplicateWords("上海市上海浦东新区")).toBe("上海市上海浦东新区");
+    })
+
+    it('getAge方法测试-周岁', () => {
+        const getAge = tools.getAge;
+        const now = new Date();
+        const year = now.getFullYear();
+
+        const currentDate = (formatStr: string = 'MMdd') => format(now, formatStr);
+        const nextDate = (formatStr: string = 'MMdd') => format(new Date(+now + 86400000), formatStr);
+        const lastDate = (formatStr: string = 'MMdd') => format(new Date(+now - 86400000), formatStr);
+
+        let age = year - 1993;
+        // 已过生日
+        expect(getAge(`1993-${lastDate('MM-dd')}`)).toBe(age)
+        expect(getAge(`3204021993${lastDate()}8492`)).toBe(age)
+        // 生日当天
+        expect(getAge(`1993-${currentDate('MM-dd')}`)).toBe(age)
+        expect(getAge(`3204021993${currentDate()}8492`)).toBe(age)
+        // 未过生日
+        expect(getAge(`1993-${nextDate('MM-dd')}`)).toBe(age - 1)
+        expect(getAge(`3204021993${nextDate()}8492`)).toBe(age - 1)
+
+        // 去年出生的
+        const lastYear = year - 1;
+        expect(getAge(`${lastYear}-${lastDate('MM-dd')}`)).toBe(1)
+        expect(getAge(`320402${lastYear}${lastDate()}8492`)).toBe(1)
+        expect(getAge(`${lastYear}-${currentDate('MM-dd')}`)).toBe(1)
+        expect(getAge(`320402${lastYear}${currentDate()}8492`)).toBe(1)
+        expect(getAge(`${lastYear}-${nextDate('MM-dd')}`)).toBe(0)
+        expect(getAge(`320402${lastYear}${nextDate()}8492`)).toBe(0)
+
+        // 今年出生的
+        expect(getAge(`${year}-${lastDate('MM-dd')}`)).toBe(0)
+        expect(getAge(`320402${year}${lastDate()}8492`)).toBe(0)
+        expect(getAge(`${year}-${currentDate('MM-dd')}`)).toBe(0)
+        expect(getAge(`320402${year}${currentDate()}8492`)).toBe(0)
+        expect(getAge(`${year}-${nextDate('MM-dd')}`)).toBe(0)
+        expect(getAge(`320402${year}${nextDate()}8492`)).toBe(0)
+    })
+
+    it('getAge方法测试-虚岁', () => {
+        const getAge = (birthday: string) => tools.getAge(birthday, true);
+        const now = new Date();
+        const year = now.getFullYear();
+
+        const currentDate = (formatStr: string = 'MMdd') => format(now, formatStr);
+        const nextDate = (formatStr: string = 'MMdd') => format(new Date(+now + 86400000), formatStr);
+        const lastDate = (formatStr: string = 'MMdd') => format(new Date(+now - 86400000), formatStr);
+
+        let age = year - 1993 + 1;
+        // 已过生日
+        expect(getAge(`1993-${lastDate('MM-dd')}`)).toBe(age)
+        expect(getAge(`3204021993${lastDate()}8492`)).toBe(age)
+        // 生日当天
+        expect(getAge(`1993-${currentDate('MM-dd')}`)).toBe(age)
+        expect(getAge(`3204021993${currentDate()}8492`)).toBe(age)
+        // 未过生日
+        expect(getAge(`1993-${nextDate('MM-dd')}`)).toBe(age)
+        expect(getAge(`3204021993${nextDate()}8492`)).toBe(age)
+
+        // 去年出生的
+        const lastYear = year - 1;
+        expect(getAge(`${lastYear}-${lastDate('MM-dd')}`)).toBe(2)
+        expect(getAge(`320402${lastYear}${lastDate()}8492`)).toBe(2)
+        expect(getAge(`${lastYear}-${currentDate('MM-dd')}`)).toBe(2)
+        expect(getAge(`320402${lastYear}${currentDate()}8492`)).toBe(2)
+        expect(getAge(`${lastYear}-${nextDate('MM-dd')}`)).toBe(2)
+        expect(getAge(`320402${lastYear}${nextDate()}8492`)).toBe(2)
+
+        // 今年出生的
+        expect(getAge(`${year}-${lastDate('MM-dd')}`)).toBe(1)
+        expect(getAge(`320402${year}${lastDate()}8492`)).toBe(1)
+        expect(getAge(`${year}-${currentDate('MM-dd')}`)).toBe(1)
+        expect(getAge(`320402${year}${currentDate()}8492`)).toBe(1)
+        expect(getAge(`${year}-${nextDate('MM-dd')}`)).toBe(1)
+        expect(getAge(`320402${year}${nextDate()}8492`)).toBe(1)
     })
 })
