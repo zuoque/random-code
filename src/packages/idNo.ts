@@ -1,5 +1,5 @@
 import { findAreaCode, randomAreaCode } from './area.ts'
-import {isDataType, isDef, randomInt} from '../utils/tools.ts'
+import { isDataType, isDef, randomInt } from '../utils/tools.ts'
 import { IdNoGenOptions, VERIFY_CODES, WEIGHT_LIST } from '../types/idNoTypes.ts'
 import { SexEnum } from "../types/enums.ts";
 

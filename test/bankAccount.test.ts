@@ -22,7 +22,7 @@ describe("测试bankAccount.ts", () => {
         new Array(1000).fill(null).forEach((_v, i) => {
             const bankAccount = i % 2 === 0 ? generate() : generate("银联");
             expect(bankAccount).toBe(validate(bankAccount) ? bankAccount: "");
-            expect(bankAccount).toMatch("^62");
+            expect(bankAccount).toMatch(/^62/);
         })
     })
 

@@ -58,8 +58,8 @@ describe('测试idNo.ts相关函数', () => {
         const isIdNo = validate(idNo);
         expect(isIdNo).toBe(true);
         const birthYear = Number(idNo.slice(6, 10));
-        expect(birthYear).toBeGreaterThanOrEqual(year - 16);
-        expect(birthYear).toBeLessThanOrEqual(year - 90);
+        expect(birthYear).toBeLessThanOrEqual(year - 16);
+        expect(birthYear).toBeGreaterThanOrEqual(year - 90);
     })
 
     it('generate方法测试-指定年龄-1', () => {
