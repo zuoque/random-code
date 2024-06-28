@@ -134,7 +134,7 @@ export const MANAGE_DEPT_CODES_MAP = {
 
 export type ManageDeptCodesMap = typeof MANAGE_DEPT_CODES_MAP;
 
-// 部门类型
+// 部门名称类型
 export type DeptNameType = keyof ManageDeptCodesMap;
 // 各部门类型
 export type DeptValueMap = ManageDeptCodesMap[DeptNameType];

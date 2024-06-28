@@ -91,7 +91,7 @@ export function getVerifyCode(baseCode: string): string {
  * @param name
  * @param nameCodeMap
  */
-export function getManageDeptByName(
+function getManageDeptByName(
     name: string,
     nameCodeMap: DeptAndOrgName2CodeMap = MANAGE_DEPT_CODES_MAP
 ): Nullable<DeptValueMap | number | string>
@@ -115,7 +115,7 @@ export function getManageDeptByName(
  * @param orgName
  */
 
-export function getDeptAndOrgCode(deptName: string, orgName?:string): DeptAndOrgCodeMapType {
+function getDeptAndOrgCode(deptName: string, orgName?:string): DeptAndOrgCodeMapType {
     const result: DeptAndOrgCodeMapType = { deptCode: null, orgCode: null }
     // 未提供登记管理部门名称时直接不用查了
     if (!deptName) return result;
