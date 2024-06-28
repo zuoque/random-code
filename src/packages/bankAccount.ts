@@ -3,32 +3,37 @@ import { randomInt, randomNumericStr, randomPick } from "../utils/tools.ts";
 
 export const BIN_LIST = ["10","18","30","35","37","40","41","42","43","44","45","46","47","48","49","50","51","52","53","54","55","56","58","60","62","65","68","69","84","87","88","94","95","98","99"]
 export const BANK_BIN_RANG_MAP = new Map([
-    ['中国工商银行（ICBC）', { start: 622200, end: 622999 }],
-    ['中国建设银行（CCB）', { start: 622700, end: 622899 }],
-    ['中国农业银行（ABC）', { start: 622800, end: 622899 }],
-    ['中国银行（BOC）', { start: 622150, end: 622199 }],
-    ['中国招商银行（CMB）', { start: 622575, end: 622576 }],
-    ['中国民生银行（CMBC）', { start: 622622, end: 622623 }],
-    ['中国光大银行（CEB）', { start: 622660, end: 622662 }],
-    ['交通银行（BCM）', { start: 622260, end: 622262 }],
-    ['中信银行（CITIC）', { start: 622690, end: 622699 }],
-    ['平安银行（PAB）', { start: 622155, end: 622157 }],
-    ['华夏银行（HXB）', { start: 622636, end: 622637 }],
-    ['兴业银行（CIB）', { start: 622908, end: 622909 }],
+    ['中国工商银行|ICBC', { start: 622200, end: 622999 }],
+    ['中国建设银行|CCB', { start: 622700, end: 622899 }],
+    ['中国农业银行|ABC', { start: 622800, end: 622899 }],
+    ['中国银行|BOC', { start: 622150, end: 622199 }],
+    ['中国招商银行|CMB', { start: 622575, end: 622576 }],
+    ['中国民生银行|CMBC', { start: 622622, end: 622623 }],
+    ['中国光大银行|CEB', { start: 622660, end: 622662 }],
+    ['交通银行|BCM', { start: 622260, end: 622262 }],
+    ['中信银行|CITIC', { start: 622690, end: 622699 }],
+    ['平安银行|PAB', { start: 622155, end: 622157 }],
+    ['华夏银行|HXB', { start: 622636, end: 622637 }],
+    ['兴业银行|CIB', { start: 622908, end: 622909 }],
 ]);
 
+export type Range = MapValueType<typeof BANK_BIN_RANG_MAP>
 
 /**
  * 随机生成银行卡号
  * https://www.jianshu.com/p/4c8a284f4dd1
+ * https://pay.weixin.qq.com/docs/merchant/development/chart/bank-of-deposit.html
  * @param bankName 银行名称或是英文简写
  * @param len 指定长度
  */
 export function generate(bankName?: string, len?: number): string {
-    // 随机发卡行标识码(前6位)
-    let bin = getBin(bankName);
+    // 随机发卡行标识码(前6位)-默认只生成银联卡号62开头的
+    let bin = getBin(bankName ?? '银联');
     // 银联标准卡长度一般是16-19位。其中信用卡的长度为16位，借记卡的长度为19位
-    len = len ? Math.max(16, Math.min(len, 19)) : randomInt(16, 19)
+    const isYl = bin.startsWith("62");
+    const max = 19;
+    const min = isYl ? 16 : 10;
+    len = len ? Math.max(min, Math.min(len, max)) : randomInt(min, max)
     // 从随机数的小数位中截取出9到12位数出来
     let endCode = randomNumericStr(len - 7);
     // 本位码
@@ -67,14 +72,30 @@ export function getVerityCode(bankAccountBaseCode: string): string {
     return (mod === 0 ? 0 : 10 - mod).toString();
 }
 
+/**
+ * 校验银行卡号是否合法
+ * @param bankAccount
+ */
+export function validate(bankAccount: string): boolean {
+    if (!bankAccount) return false;
+    const length = bankAccount.length;
+    if (length < 10 || length > 19) return false;
+    // 截取本位码
+    let baseCodes = (bankAccount + "").slice(0, -1);
+    let verifyCode = getVerityCode(baseCodes);
+    if (verifyCode === null) return false;
+    const reg = new RegExp(`^(${BIN_LIST.join("|")})`);
+    return reg.test(bankAccount) && bankAccount.endsWith(verifyCode + "");
+}
+
 
 /**
  * 随机获取发卡行标识码
- * 也可以通过银行名称或是简称生成对应银行的标识码
+ * 也可以通过银行名称或是简称生成对应银行的标识码, 找不到则会返回任意银联卡号
  * 如果输入“银联” 则会随机生成一个银联成员银行的标识码
  * @param bankName
  */
-export function getBin(bankName?: string): string {
+function getBin(bankName?: string): string {
     if (bankName) {
         const bankNameList = Array.from(BANK_BIN_RANG_MAP.keys());
         let targetName: Nullable<string>;
@@ -82,7 +103,7 @@ export function getBin(bankName?: string): string {
             // 如果是堕入的银联，则会随机生成随机银行的标识码
             targetName = randomPick(bankNameList);
         } else {
-            targetName = bankNameList.find(name => name.includes(bankName))
+            targetName = bankNameList.find(name => !!bankName && name.includes(bankName))
         }
         if (targetName) {
             let target = BANK_BIN_RANG_MAP.get(targetName)
@@ -92,6 +113,9 @@ export function getBin(bankName?: string): string {
                 let max = target.end;
                 return randomInt(min, max).toString();
             }
+        } else {
+            bankName = "银联";
+            return getBin(bankName);
         }
     }
     let len = BIN_LIST.length;
@@ -100,17 +124,4 @@ export function getBin(bankName?: string): string {
     // 生成后四位数
     let end = randomNumericStr(4);
     return "" + bin + end;
-}
-
-/**
- * 校验银行卡号是否合法
- * @param bankAccount
- */
-export function validate(bankAccount: string): boolean {
-    if (!bankAccount) return false;
-    // 截取本位码
-    let baseCodes = (bankAccount + "").slice(0, -1);
-    let verifyCode = getVerityCode(baseCodes);
-    if (verifyCode === null) return false;
-    return bankAccount.endsWith(verifyCode + "");
 }
