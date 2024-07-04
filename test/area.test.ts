@@ -6,8 +6,8 @@ import {
     findAreaCode,
     randomAddrByCode,
     getCountyByCode
-} from "../src/packages/area.ts";
-import { AreaLevelEnum } from "../src/types/enums.ts";
+} from "../src/packages/area";
+import { AreaLevelEnum } from "../src/types/enums";
 import { areaList } from "@vant/area-data"
 
 describe("测试area.ts相关函数", () => {

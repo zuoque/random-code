@@ -7,10 +7,10 @@ import {
     DeptValueMap,
     CodeType,
     DeptAndOrgCodeMapType
-} from "../types/creditCodeTypes.ts";
-import { findFitWords } from "../utils/tools.ts";
-import { findAreaCode, randomAreaCode } from "./area.ts";
-import { generate as generateOrgCode } from "./orgCode.ts";
+} from "../types/creditCodeTypes";
+import { findFitWords } from "../utils/tools";
+import { findAreaCode, randomAreaCode } from "./area";
+import { generate as generateOrgCode } from "./orgCode";
 
 
 /**

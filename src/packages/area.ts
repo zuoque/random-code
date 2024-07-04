@@ -1,6 +1,6 @@
 import { areaList } from "@vant/area-data"
-import { removeDuplicateWords } from "../utils/tools.ts";
-import { AreaLevelEnum } from "../types/enums.ts";
+import { removeDuplicateWords } from "../utils/tools";
+import { AreaLevelEnum } from "../types/enums";
 
 /**
  * 获取随机的行政区划代码

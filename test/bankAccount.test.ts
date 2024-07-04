@@ -1,4 +1,4 @@
-import { BANK_BIN_RANG_MAP, generate, getVerityCode, validate, Range } from "../src/packages/bankAccount.ts";
+import { BANK_BIN_RANG_MAP, generate, getVerityCode, validate, Range } from "../src/packages/bankAccount";
 
 
 describe("测试bankAccount.ts", () => {

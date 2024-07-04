@@ -1,4 +1,4 @@
-import {genBirthday, generate, getVerifyCode, validate} from '../src/packages/idNo.ts';
+import {genBirthday, generate, getVerifyCode, validate} from "../src/packages/idNo";
 import {SexEnum} from "../src/types/enums";
 import {getAge} from "../src/utils/tools";
 

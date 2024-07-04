@@ -1,5 +1,5 @@
-import * as tools from "../src/utils/tools.ts";
-import { addrMap } from "../src/packages/area.ts";
+import * as tools from "../src/utils/tools";
+import { addrMap } from "../src/packages/area";
 import { format } from "date-fns"
 
 // 生成jest测试用例

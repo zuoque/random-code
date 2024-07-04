@@ -1,5 +1,5 @@
-import { TELCO_ENUM } from "../../types/enums.ts";
-import { randomInt } from "../../utils/tools.ts";
+import { TELCO_ENUM } from "../../types/enums";
+import { randomInt } from "../../utils/tools";
 
 export class HaoDuan {
     /**

@@ -1,4 +1,4 @@
-import { generate, validate, getVerifyCode } from "../src/packages/creditCode.ts";
+import { generate, validate, getVerifyCode } from "../src/packages/creditCode";
 
 
 describe("测试creditCode.ts", () => {

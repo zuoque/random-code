@@ -12,12 +12,13 @@
 
     /* Bundler mode */
     "moduleResolution": "bundler",
-    "allowImportingTsExtensions": true,
+//    "allowImportingTsExtensions": true,
     "resolveJsonModule": true,
     "isolatedModules": true,
-    "declaration": true,
-    "emitDeclarationOnly": true,
-    "declarationDir": "./dist/types",
+    "noEmit": true,
+//    "declaration": true,
+//    "emitDeclarationOnly": true,
+//    "declarationDir": "./dist/types",
 
     /* Linting */
     "strict": true,

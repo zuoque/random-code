@@ -1,4 +1,4 @@
-import { SexEnum } from "./enums.ts";
+import { SexEnum } from "./enums";
 
 export type IdNoGenOptions = {
     minAge?: number, // 最小年龄

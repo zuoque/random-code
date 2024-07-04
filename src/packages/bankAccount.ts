@@ -1,5 +1,5 @@
 // 发卡行标识码(BIN)
-import { randomInt, randomNumericStr, randomPick } from "../utils/tools.ts";
+import { randomInt, randomNumericStr, randomPick } from "../utils/tools";
 
 export const BIN_LIST = ["10","18","30","35","37","40","41","42","43","44","45","46","47","48","49","50","51","52","53","54","55","56","58","60","62","65","68","69","84","87","88","94","95","98","99"]
 export const BANK_BIN_RANG_MAP = new Map([

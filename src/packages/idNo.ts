@@ -1,7 +1,7 @@
-import { findAreaCode, randomAreaCode } from './area.ts'
-import { isDataType, isDef, randomInt } from '../utils/tools.ts'
-import { IdNoGenOptions, VERIFY_CODES, WEIGHT_LIST } from '../types/idNoTypes.ts'
-import { SexEnum } from "../types/enums.ts";
+import { findAreaCode, randomAreaCode } from "./area"
+import { isDataType, isDef, randomInt } from "../utils/tools"
+import { IdNoGenOptions, VERIFY_CODES, WEIGHT_LIST } from "../types/idNoTypes"
+import { SexEnum } from "../types/enums";
 
 /**
  * 随机生成一个身份证号码

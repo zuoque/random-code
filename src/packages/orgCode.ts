@@ -1,5 +1,5 @@
-import { BASE_CODE_COUNT, CHARS_STR, MOD_CODE_MAP, WEIGHTS } from "../types/orgCodeTypes.ts";
-import { randomInt } from "../utils/tools.ts";
+import { BASE_CODE_COUNT, CHARS_STR, MOD_CODE_MAP, WEIGHTS } from "../types/orgCodeTypes";
+import { randomInt } from "../utils/tools";
 
 
 /**

@@ -3,9 +3,9 @@
  * 1：维基百科：中国大陆移动终端通信号码 [https://zh.wikipedia.org/wiki/%E4%B8%AD%E5%9B%BD%E5%A4%A7%E9%99%86%E7%A7%BB%E5%8A%A8%E7%BB%88%E7%AB%AF%E9%80%9A%E4%BF%A1%E5%8F%B7%E7%A0%81#cite_note-5]
  * 2：全球短信发送规则 [https://support.huaweicloud.com/intl/zh-cn/productdesc-msgsms/phone_numbers.html#section1]
  */
-import { randomInt, randomNumericStr } from "../../utils/tools.ts";
-import { TELCO_ENUM } from "../../types/enums.ts"
-import { HaoDuan } from "./HaoDuan.ts";
+import { randomInt, randomNumericStr } from "../../utils/tools";
+import { TELCO_ENUM } from "../../types/enums"
+import { HaoDuan } from "./HaoDuan";
 /**
  * 随机生成手机号
  */

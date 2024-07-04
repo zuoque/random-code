@@ -1,4 +1,4 @@
-import { generate, getVerityCode, validate } from "../src/packages/orgCode.ts"
+import { generate, getVerityCode, validate } from "../src/packages/orgCode"
 import { CHARS_STR } from "../src/types/orgCodeTypes";
 
 const letters = CHARS_STR.slice(10)
