@@ -2,7 +2,7 @@
   "name": "@zuoque/random-coding",
   "description": "提供随机的身份证号、统一社会信用代码、组织机构代码、手机号、银行卡号生成方法",
   "private": false,
-  "version": "0.0.5",
+  "version": "0.0.6",
   "author": "zuoque",
   "type": "module",
   "main": "dist/main.js",
@@ -70,7 +70,7 @@
     "build": "tsc && vite build",
     "preview": "vite preview",
     "test": "jest test/*.test.ts",
-    "publish": "npm publish",
+    "publish": "npm run build && npm publish",
     "docs": "typedoc"
   },
   "dependencies": {
