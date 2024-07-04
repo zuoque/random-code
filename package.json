@@ -1,17 +1,18 @@
 {
-  "name": "random-code",
+  "name": "@zuoque/random-coding",
   "description": "提供随机的身份证号、统一社会信用代码、组织机构代码、手机号、银行卡号生成方法",
   "private": false,
-  "version": "1.0.0",
+  "version": "0.0.4",
   "author": "zuoque",
   "type": "module",
   "main": "dist/main.js",
+  "types": "dist/main.d.ts",
   "files": [
     "dist"
   ],
   "repository": {
     "type": "git",
-    "url": "https://github.com/C5MKID/random-code.git"
+    "url": "git+https://github.com/zuoque/random-coding.git#main"
   },
   "keywords": [
     "typescript",
@@ -25,42 +26,51 @@
   ],
   "exports": {
     ".": {
+      "types": "./dist/types/main.d.ts",
       "require": "./dist/main.cjs",
       "default": "./dist/main.js"
     },
     "./tools": {
+      "types": "./dist/types/packages/tools.d.ts",
       "require": "./dist/tools/tools.cjs",
       "default": "./dist/tools/tools.js"
     },
     "./area": {
+      "types": "./dist/types/packages/area.d.ts",
       "require": "./dist/area/area.cjs",
       "default": "./dist/area/area.js"
     },
     "./bank-account": {
+      "types": "./dist/types/packages/bankAccount.d.ts",
       "require": "./dist/bankAccount/bankAccount.cjs",
       "default": "./dist/bankAccount/bankAccount.js"
     },
     "./credit-code": {
+      "types": "./dist/types/packages/creditCode.d.ts",
       "require": "./dist/creditCode/creditCode.cjs",
       "default": "./dist/creditCode/creditCode.js"
     },
     "./id-no": {
+      "types": "./dist/types/packages/idNo.d.ts",
       "require": "./dist/idNo/idNo.cjs",
       "default": "./dist/idNo/idNo.js"
     },
     "./org-code": {
+      "types": "./dist/types/packages/orgCode.d.ts",
       "require": "./dist/orgCode/orgCode.cjs",
       "default": "./dist/orgCode/orgCode.js"
     },
     "./phone": {
+      "types": "./dist/types/packages/phone/index.d.ts",
       "require": "./dist/phone/phone.cjs",
       "default": "./dist/phone/phone.js"
     }
   },
   "scripts": {
-    "build": "tsc && vite build",
+    "build": "vite build && tsc",
     "preview": "vite preview",
-    "test": "jest test/*.test.ts"
+    "test": "jest test/*.test.ts",
+    "publish": "npm publish"
   },
   "dependencies": {
     "@vant/area-data": "^1.5.0"
@@ -73,6 +83,19 @@
     "ts-node": "^10.9.2",
     "tsconfig-paths": "^4.2.0",
     "typescript": "^5.2.2",
-    "vite": "^5.2.0"
+    "vite": "^5.2.0",
+    "vite-plugin-dts": "^3.9.1"
+  },
+  "bugs": {
+    "url": "https://github.com/zuoque/random-coding/issues"
+  },
+  "homepage": "https://github.com/zuoque/random-coding/tree/main#readme",
+  "directories": {
+    "test": "test"
+  },
+  "license": "ISC",
+  "publishConfig": {
+    "registry": "https://registry.npmjs.org",
+    "access": "public"
   }
 }
