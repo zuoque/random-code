@@ -1,0 +1,15 @@
+{
+  "entryPoints": [
+    "src/packages/area.ts",
+    "src/packages/bankAccount.ts",
+    "src/packages/creditCode.ts",
+    "src/packages/idNo.ts",
+    "src/packages/orgCode.ts",
+    "src/packages/phone/index.ts",
+    "src/utils/tools.ts"
+  ],
+  "exclude": ["./Readme.md"],
+  "out": "docs",
+  "plugin": ["typedoc-plugin-markdown"],
+  "outputFileStrategy": "modules"
+}

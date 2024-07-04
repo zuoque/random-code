@@ -70,7 +70,8 @@
     "build": "tsc && vite build",
     "preview": "vite preview",
     "test": "jest test/*.test.ts",
-    "publish": "npm publish"
+    "publish": "npm publish",
+    "docs": "typedoc"
   },
   "dependencies": {
     "@vant/area-data": "^1.5.0"
@@ -82,6 +83,8 @@
     "ts-jest": "^29.1.4",
     "ts-node": "^10.9.2",
     "tsconfig-paths": "^4.2.0",
+    "typedoc": "^0.26.3",
+    "typedoc-plugin-markdown": "^4.1.1",
     "typescript": "^5.2.2",
     "vite": "^5.2.0",
     "vite-plugin-dts": "^3.9.1"
