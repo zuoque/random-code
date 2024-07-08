@@ -2,7 +2,7 @@
   "name": "@zuoque/random-coding",
   "description": "提供随机的身份证号、统一社会信用代码、组织机构代码、手机号、银行卡号生成方法",
   "private": false,
-  "version": "0.0.8",
+  "version": "0.0.9",
   "author": "zuoque",
   "type": "module",
   "main": "dist/main.js",
@@ -31,7 +31,7 @@
       "default": "./dist/main.js"
     },
     "./tools": {
-      "types": "./dist/types/packages/tools.d.ts",
+      "types": "./dist/types/utils/tools.d.ts",
       "require": "./dist/tools/tools.cjs",
       "default": "./dist/tools/tools.js"
     },
