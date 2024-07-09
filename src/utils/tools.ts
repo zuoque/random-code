@@ -204,8 +204,8 @@ export function removeDuplicateWords(text: string): string {
  * @param idNoOrBirthday
  * @param isVirtualAge 是否计算为虚岁
  */
-export function getAge(idNoOrBirthday: string, isVirtualAge = false): Nullable<number> {
-    if (!idNoOrBirthday) return null;
+export function getAge(idNoOrBirthday: string, isVirtualAge = false): number {
+    if (!idNoOrBirthday) return 0;
     let birthday = idNoOrBirthday;
     if (idNoOrBirthday.length === 18) {
         birthday = idNoOrBirthday.slice(6, 14);
