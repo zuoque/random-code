@@ -79,7 +79,7 @@ export function randomInt(minOrMax?: number, max?: number): number {
  * 从一个数组中, 随机选择一个元素
  * @param list 一个类数组对象
  */
-export function randomPick<T>(list: ArrayLike<T>): Nullable<T> {
+export function randomPick<T>(list: ArrayLike<T>): T {
     list = Array.from(list);
     let len = list.length;
     let index = randomInt(len - 1);
